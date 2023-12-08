@@ -1,0 +1,54 @@
+---
+title: "PSTAT174 Final Project"
+author: "Ryan Yee"
+date: "5/29/2023"
+output:
+  html_document:
+    theme: readable
+    toc: yes
+  pdf_document: 
+    toc: yes
+    latex_engine: xelatex
+subtitle: Week 9
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = F}
+bfcolor <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{\\textbf{%s}}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'><b>%s</b></span>", color, x)
+  } else x
+}
+```
+
+```{r}
+#install.packages("devtools")
+#devtools::install_github("FinYang/tsdl")
+#install.packages("astsa")
+
+library(tsdl)
+library(astsa)
+```
+
+```{r}
+gdp.csv = read.table("GDPC1.csv", sep=",", header=FALSE, skip=1, nrows=305)
+
+head(gdp.csv)
+#gdp2 = ts(gdp[,2], start = c(1947,1), frequency = 365.25)
+#ts.plot(gdp2)
+
+```
+
+
+```{r}
+gdp = ts(gdp.csv[,2], start = c(1947,1), frequency = 4)
+train <- gdp[1:293]
+test <- gdp[294:305]
+ts.plot(train, ylab = "Quarterly U.S. GDP (Billions of Chained 2012 Dollars)")
+```
