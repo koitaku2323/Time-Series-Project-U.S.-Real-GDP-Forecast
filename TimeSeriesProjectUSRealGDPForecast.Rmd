@@ -1,5 +1,5 @@
 ---
-title: "PSTAT174 Final Project: U.S. Real GDP Forecast"
+title: "Time Series Project: U.S. Real GDP Forecast"
 author: "Ryan Yee"
 date: "5/29/2023"
 output:
