@@ -1,4 +1,4 @@
-# PSTAT174-Final-Project-U.S.-Real-GDP-Forecast
+# U.S.-Real-GDP-Forecast
 
 This time series project aimed to forecast U.S. real GDP using quarterly data from 2002 to 2023.
 The project aims to identify critical trends and patterns in U.S. real GDP over this period. Various time series
