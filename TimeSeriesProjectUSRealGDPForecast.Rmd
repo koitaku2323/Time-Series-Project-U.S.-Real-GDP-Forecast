@@ -3,17 +3,17 @@ title: "Time Series Project: U.S. Real GDP Forecast"
 author: "Ryan Yee"
 date: "5/29/2023"
 output:
-  html_document:
-    theme: readable
-    code_folding: hide
-    code_download: true
-    toc: yes
   pdf_document: 
     toc: yes
     latex_engine: xelatex
     fig_caption: true
     df_print: kable
     highlight: tango
+  html_document:
+    theme: readable
+    code_folding: hide
+    code_download: true
+    toc: yes
 fontsize: 10pt
 ---
 
@@ -99,7 +99,7 @@ U.S. Bureau of Economic Analysis, Real Gross Domestic Product [ND000334Q], retri
 ---
 
 ```{r}
-gdp.csv <- read.table("ND000334Q.csv", sep = ",", header = FALSE, skip = 1, nrows = 85)
+gdp.csv <- read.table("data/ND000334Q.csv", sep = ",", header = FALSE, skip = 1, nrows = 85)
 head(gdp.csv)
 tail(gdp.csv)
 ```
@@ -411,7 +411,7 @@ Check invertibility of model B: SARIMA (p = 1, d = 1, q = 1) × (P = 1, D = 1, Q
 
 
 ```{r, include = F}
-source("plot.roots.R")
+source("scripts/plot.roots.R")
 plot.roots(NULL, polyroot(c(1, -0.265)), main = "(B) roots of ma part, nonseasonal ")
 ```
 
@@ -554,6 +554,11 @@ Final Model for the logarithm transform of original data: ln(U_t) follows SARIMA
 ---
 
 Compare and evaluate model forecasts using 12 test values from the true sample
+
+```{r}
+train.log = ts(train.log) # Convert train.log to time series object
+```
+
 
 ```{r, include = F}
 x <- sarima.for(xdata = train.log, n.ahead = 12, p = 3, d = 1, q = 2, P = 0, D = 0, Q = 0, S = 4)
@@ -707,7 +712,7 @@ I would like to acknowledge the sources of the data used in this project, the U.
 The following code snippet illustrates the process of loading and examining the GDP data set:
 
 ```{r, eval = F}
-gdp.csv <- read.table("ND000334Q.csv", sep = ",", header = FALSE, skip = 1, nrows = 85)
+gdp.csv <- read.table("data/ND000334Q.csv", sep = ",", header = FALSE, skip = 1, nrows = 85)
 head(gdp.csv)
 tail(gdp.csv)
 ```
@@ -1031,6 +1036,10 @@ var
 ---
 
 **Appendix L: Forecast Candidate Models**
+
+```{r}
+train.log = ts(train.log) # Convert train.log to time series object
+```
 
 SARIMA (p = 0, d = 1, q = 0) × (P = 0, D = 1, Q = 4)s=4
 
